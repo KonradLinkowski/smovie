@@ -1,0 +1,55 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.left::after {
+  content: "";
+  flex: auto;
+}
+.center {
+  justify-content: center;
+}
+.center-h {
+  margin: 0 auto;
+}
+.padding {
+  padding: 10px;
+}
+.card {
+  width: 10rem;
+  margin: 10px;
+}
+img {
+  width: 100%;
+}
+input.search {
+  width: 80%;
+  height: 2rem;
+}
+button {
+  width: 3rem;
+}
+.lightbox {
+  position: fixed;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: #000000d0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.details {
+  background-color: white;
+  width: 600px;
+  height: 400px;
+}
