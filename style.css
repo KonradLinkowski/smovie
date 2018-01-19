@@ -50,6 +50,11 @@ button {
 }
 .details {
   background-color: white;
-  width: 600px;
-  height: 400px;
+  width: 40rem;
+  height: 30rem;
+  border-radius: 5px;
+  z-index: 100;
+}
+.poster {
+  width: 10rem;
 }

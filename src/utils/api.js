@@ -17,8 +17,25 @@ export function getPopularMovies(params) {
       resolve(data)
     })
     .catch(error => {
-      console.error(error)
       reject(error)
     });
+  })
+}
+
+export function getGenres() {
+  return new Promise((resolve, reject) => {
+    axios({
+      method: 'GET',
+      url: serverURL + 'genre/movie/list',
+      params: {
+        api_key: key
+      }
+    })
+    .then(({data}) => {
+      resolve(data.genres)
+    })
+    .catch(err => {
+      reject(err)
+    })
   })
 }

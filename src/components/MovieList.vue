@@ -1,11 +1,11 @@
 <template>
     <div style="width: 100%">
-        <div class="container left" style="width: 900px; margin: 0 auto">
+        <div class="container left" style=" margin: 0 auto">
             <Movie v-for="item in list" :key="item.id" :movie="item" />
         </div>
         <infinite-loading @infinite="infiniteHandler">
             <span slot="no-more">
-                There is no more posts :(
+                <a href="#">Next page </a>
             </span>
         </infinite-loading>
     </div>
@@ -36,21 +36,22 @@ export default {
     },
     methods: {
         infiniteHandler($state) {
-        getPopularMovies({
-            page: this.page
-        })
-        .then(movies => {
-            if (movies.results.length) {
-                this.list = this.list.concat(movies.results)
-                $state.loaded();
-                this.page++;
-                /*if (this.list.length / 20 === 2) {
-                $state.complete();
-                }*/
-            } else {
-                $state.complete();
-            }
-        })
+            console.log(this.$route)
+            getPopularMovies({
+                page: this.page
+            })
+            .then(movies => {
+                if (movies.results.length) {
+                    this.list = this.list.concat(movies.results)
+                    $state.loaded();
+                    this.page++;
+                    if (this.list.length / 20 === 5) {
+                        $state.complete();
+                    }
+                } else {
+                    $state.complete();
+                }
+            })
         },
     },
     components: {
