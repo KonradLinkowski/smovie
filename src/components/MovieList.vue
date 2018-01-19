@@ -1,6 +1,6 @@
 <template>
     <div style="width: 100%">
-        <div class="container left" style=" margin: 0 auto">
+        <div class="container left" style=" margin: 0 auto; max-width: 80%">
             <Movie v-for="item in list" :key="item.id" :movie="item" />
         </div>
         <infinite-loading @infinite="infiniteHandler">

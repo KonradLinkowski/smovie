@@ -13,6 +13,7 @@ body {
 .left::after {
   content: "";
   flex: auto;
+  margin: 10px;
 }
 .center {
   justify-content: center;
@@ -24,7 +25,7 @@ body {
   padding: 10px;
 }
 .card {
-  width: 10rem;
+  position: relative;
   margin: 10px;
 }
 img {
@@ -56,5 +57,29 @@ button {
   z-index: 100;
 }
 .poster {
-  width: 10rem;
+  width: 15rem;
+}
+.border {
+  border-color: gray;
+  border-width: 1px;
+  border-style: solid;
+}
+.fnt-sm {
+  font-size: 0.8rem;
+}
+.fnt-md {
+  font-size: 1.2rem;
+}
+h1, h2, h3, h4, h5, h6 {
+  margin: 0
+}
+
+.footer {
+  right: 0;
+  bottom: 0;
+  height: 2rem;
+  width: 100%;
+}
+.no-margin {
+  margin: 0;
 }
