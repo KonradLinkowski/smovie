@@ -51,8 +51,7 @@ button {
 }
 .details {
   background-color: white;
-  width: 40rem;
-  height: 30rem;
+  width: 50rem;
   border-radius: 5px;
   z-index: 100;
 }
@@ -82,4 +81,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 .no-margin {
   margin: 0;
+}
+
+ul {
+  margin-top: 0;
 }
