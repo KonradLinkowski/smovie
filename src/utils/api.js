@@ -42,6 +42,27 @@ export function getMovie(id) {
   })
 }
 
+export function findMovies(msg, page) {
+  return new Promise((resolve, reject) => {
+    axios({
+      method: 'GET',
+      url: serverURL + 'search/movie/',
+      params: {
+        api_key: key,
+        language: 'pl',
+        page: page,
+        query: msg
+      }
+    })
+    .then(({data}) => {
+      resolve(data)
+    })
+    .catch(err => {
+      reject(err)
+    })
+  })
+}
+
 export function getGenres() {
   return new Promise((resolve, reject) => {
     axios({

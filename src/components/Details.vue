@@ -54,11 +54,11 @@ export default {
       getMovie(movie.id)
       .then(details => {
         this.movie = Object.assign(movie, details)
+        this.isOpen = true;
       })
       .catch(err => {
         console.error(err)
       })
-      this.isOpen = true;
     },
     close() {
       this.isOpen = false;
