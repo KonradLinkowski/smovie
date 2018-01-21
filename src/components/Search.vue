@@ -21,13 +21,7 @@ export default {
   },
   methods: {
     search: _.debounce(function() {
-      findMovies(this.message)
-      .then(movies => {
-        console.log(movies)
-      })
-      .catch(err => {
-        console.error(err)
-      })
+      eventHub.$emit('search-movie', this.message)
     }, 500)
   }
 }

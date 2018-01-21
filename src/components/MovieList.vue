@@ -14,25 +14,23 @@
 <script>
 import Movie from './Movie'
 import InfiniteLoading from 'vue-infinite-loading';
-import { getPopularMovies } from '../utils/api'
+import { getPopularMovies, findMovies } from '../utils/api'
+import eventHub from '../utils/eventhub';
 export default {
     data() {
         return {
             list: [],
-            page: 1
+            page: 1,
+            searchMode: false
         }
     },
     created: function() {
-       /*
-        getPopularMovies()
-        .then(movies => {
-            this.list = this.list.concat(movies.results)
-            console.log(this.list)
-        })
-        .catch(err => {
-            console.error(err)
-        })
-        */
+       eventHub.$on('search-movie', this.searchMovies)
+    },
+    watch:{
+        searchMode: function() {
+            this.list = []
+        }
     },
     methods: {
         infiniteHandler($state) {
@@ -53,6 +51,21 @@ export default {
                 }
             })
         },
+        searchMovies(message) {
+            if (message.length == 0) {
+                this.searchMode = false
+                return
+            }
+            this.searchMode = true
+            findMovies(message)
+            .then(movies => {
+                console.log(movies)
+                this.list = this.list.concat(movies.results)
+            })
+            .catch(err => {
+                console.error(err)
+            })
+        }
     },
     components: {
         Movie,
