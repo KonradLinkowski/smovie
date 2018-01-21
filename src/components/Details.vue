@@ -8,6 +8,7 @@
       </div>
       <div style="padding:0">
         <h2>{{ movie.title }}</h2>
+        <h3>{{ movie.original_title }}</h3>
         <a :href="'https://www.themoviedb.org/movie/' + movie.id">https://www.themoviedb.org/movie/{{ movie.id }}</a>
         <p>
           {{ movie.overview }}
