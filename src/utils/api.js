@@ -46,7 +46,7 @@ export function findMovies(msg, page) {
   return new Promise((resolve, reject) => {
     axios({
       method: 'GET',
-      url: serverURL + 'search/movie/',
+      url: serverURL + 'search/movie',
       params: {
         api_key: key,
         language: 'pl',
