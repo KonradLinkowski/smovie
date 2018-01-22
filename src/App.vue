@@ -2,7 +2,7 @@
   <div id="app">
     <Details />
     <Search />
-    <MovieList />
+    <router-view></router-view>
   </div>
 </template>
 
@@ -19,3 +19,6 @@ export default {
   }
 }
 </script>
+<style>
+@import './assets/style.css';
+</style>
