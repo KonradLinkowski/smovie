@@ -42,7 +42,7 @@ export function getMovie(id) {
   })
 }
 
-export function findMovies(msg, page) {
+export function findMovies(params) {
   return new Promise((resolve, reject) => {
     axios({
       method: 'GET',
@@ -50,8 +50,8 @@ export function findMovies(msg, page) {
       params: {
         api_key: key,
         language: 'pl',
-        page: page,
-        query: msg
+        page: params.page,
+        query: params.query
       }
     })
     .then(({data}) => {
