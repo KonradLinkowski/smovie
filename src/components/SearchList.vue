@@ -1,18 +1,18 @@
 <template>
   <div class="max-width">
-    <div class="container site-width center-hor">
-      <button v-show="page > 1" @click="prevPage">Previous Page</button>
+    <div class="container flex-space-between flex-center-vert navigation site-width center-hor">
+      <button v-show="page > 1" @click="prevPage"><i class="medium material-icons">navigate_before</i></button>
       <div style="flex-grow"></div>
-      <button v-show="hasNextPage" @click="nextPage">Next Page</button>
+      <button v-show="hasNextPage" @click="nextPage"><i class="medium material-icons">navigate_next</i></button>
     </div>
     <div class="container flex-wrap blank-field site-width center-hor">
       <Movie v-for="item in list" :key="item.id" :movie="item" />
     </div>
     <infinite-loading @infinite="infiniteHandler">
-      <div slot="no-more" class="container site-width center-hor">
-        <button v-show="page > 1" @click="prevPage">Previous Page</button>
+      <div slot="no-more" class="container flex-space-between flex-center-vert navigation site-width center-hor">
+        <button v-show="page > 1" @click="prevPage"><i class="medium material-icons">navigate_before</i></button>
         <div style="flex-grow"></div>
-        <button v-show="hasNextPage" @click="nextPage">Next Page</button>
+        <button v-show="hasNextPage" @click="nextPage"><i class="medium material-icons">navigate_next</i></button>
       </div>
     </infinite-loading>
   </div>
@@ -33,7 +33,7 @@ export default {
       page: 1,
       searchedMovie: 'wiedźmin',
       infiniteState: null,
-      hasNextPage: true
+      totalPages: null
     }
   },
   created: function() {
@@ -45,7 +45,6 @@ export default {
       this.page = 1
       this.moviePage = 1
       this.list = []
-      this.hasNextPage = true
       this.infiniteState.reset()
     }
   },
@@ -62,11 +61,9 @@ export default {
           $state.loaded();
           this.moviePage++;
           if (this.moviePage % (this.pagePerSite + 1) === 0) {
-            this.hasNextPage = false
             $state.complete();
           }
         } else {
-          this.hasNextPage = false
           $state.complete();
         }
       })
@@ -77,13 +74,21 @@ export default {
       this.list = []
       this.infiniteState.reset()
     },
+    hasNextPage() {
+      if(totalPages == null) {
+        return true
+      }
+      if(this.moviePage % this.pagePerSite < this.totalPages % this.pagePerSite) {
+        return true
+      }
+      return false
+    },
     nextPage() {
       this.page++
       this.moviePage = (this.page - 1) * this.pagePerSite + 1
       this.list = []
       let query = { movie: this.$route.query.movie, page: this.page }
       router.push({ query: query })
-      this.hasNextPage = true
       this.infiniteState.reset()
     },
     prevPage() {
@@ -93,7 +98,6 @@ export default {
         this.list = []
         let query = { movie: this.$route.query.movie, page: this.page }
         router.push({ query: query })
-        this.hasNextPage = true
         this.infiniteState.reset()
       }
     },
