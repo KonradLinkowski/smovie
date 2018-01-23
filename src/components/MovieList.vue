@@ -1,5 +1,7 @@
 <template>
     <div style="width: 100%">
+        <button v-show="page > 1" @click="prevPage">Previous Page</button>
+        <button v-show="hasNextPage" @click="nextPage">Next Page</button>
         <div class="container left" style=" margin: 0 auto; max-width: 80%">
             <Movie v-for="item in list" :key="item.id" :movie="item" />
         </div>
@@ -26,7 +28,7 @@ export default {
             pagePerSite: 5,
             page: 1,
             infiniteState: null,
-            hasNextPage: false
+            hasNextPage: true
         }
     },
     created: function() {
