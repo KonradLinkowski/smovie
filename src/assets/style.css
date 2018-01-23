@@ -43,10 +43,25 @@ header {
   display: flex;
   justify-content: space-around;
 }
+.container-vert {
+  display: flex;
+  flex-direction: column;
+}
 .blank-field::after {
   content: "";
   flex: auto;
   /*margin: var(--movie-margin);*/
+}
+.movie-footer {
+  border-top: solid 1px lightgray;
+  height: 2rem;
+  padding: 10px;
+  margin: 10px;
+  flex-grow: 0;
+}
+.movie-details {
+  padding: 0 10px;
+  margin: 10px 10px 0 10px;
 }
 .flex-space-between{
   justify-content: space-between;
@@ -169,7 +184,6 @@ h1, h2, h3, h4, h5, h6 {
   transition: box-shadow 10s;
 }
 .hvr-float {
-  display: inline-block;
   vertical-align: middle;
   -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
