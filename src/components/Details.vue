@@ -1,7 +1,7 @@
 <template>
   <div class="lightbox" v-show="isOpen">
-    <div style="width: 100%; height: 100%; position: fixed"  @click="close"></div>
-    <div class="details container" style="z-index: 100; flex-wrap: nowrap">
+    <div class="position-fixed max-width max-height top-0 clickable" @click="close"></div>
+    <div class="details container">
       <div class="poster" style="margin: 10px; flex-shrink: 0">
         <img class="border" v-if="movie.poster_path" :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="Movie">
         <img class="border" v-else src="https://placehold.it/500x750" alt="Movie">

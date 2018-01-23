@@ -1,15 +1,19 @@
 <template>
-  <div style="width: 100%">
-    <button v-show="page > 1" @click="prevPage">Previous Page</button>
-    <button v-show="hasNextPage" @click="nextPage">Next Page</button>
-    <div class="container left" style=" margin: 0 auto; max-width: 80%">
+  <div class="max-width">
+    <div class="container site-width center-hor">
+      <button v-show="page > 1" @click="prevPage">Previous Page</button>
+      <div style="flex-grow"></div>
+      <button v-show="hasNextPage" @click="nextPage">Next Page</button>
+    </div>
+    <div class="container flex-wrap blank-field site-width center-hor">
       <Movie v-for="item in list" :key="item.id" :movie="item" />
     </div>
     <infinite-loading @infinite="infiniteHandler">
-      <span slot="no-more">
+      <div slot="no-more" class="container site-width center-hor">
         <button v-show="page > 1" @click="prevPage">Previous Page</button>
+        <div style="flex-grow"></div>
         <button v-show="hasNextPage" @click="nextPage">Next Page</button>
-      </span>
+      </div>
     </infinite-loading>
   </div>
 </template>
