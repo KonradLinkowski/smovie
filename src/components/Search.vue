@@ -1,7 +1,8 @@
 <template>
   <div class="container center padding">
-      <input class="search padding" v-model="message" placeholder="Szukaj">
-      <button @click="this.search">Go!</button>
+    <button @click="goHome">Home</button>
+    <input class="search padding" @keyup.enter="search" v-model="message" placeholder="Szukaj">
+    <button @click="search">Go!</button>
   </div>
 </template>
 
@@ -26,6 +27,10 @@ export default {
   methods: {
     search: function() {
       router.push({ name: 'SearchList', query: { movie: this.message }})
+    },
+    goHome() {
+      router.push({ path: '/' })
+      this.message = ''
     }
   }
 }
