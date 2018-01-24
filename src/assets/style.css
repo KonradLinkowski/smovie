@@ -17,15 +17,35 @@ body {
   --site-width: 90%;
 }
 @media (min-width: 320px) {
+  .details{
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 @media (min-width: 480px) {
 }
 @media (min-width: 768px) {
+  .details{
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    flex-direction: row;
+    align-items: initial;
+  }
 }
 @media (min-width: 992px) {
+  .details{
+    width: 70%;
+    height: initial;
+    overflow: auto;
+    flex-direction: row;
+    align-items: initial;
+  }
 }
 @media (min-width: 1200px) {
-
 }
 header {
   background-color: var(--main-color);
@@ -65,6 +85,12 @@ header {
   padding: 0 10px;
   margin: 10px 10px 0 10px;
 }
+.flex-strech-self{
+  align-self: stretch;
+}
+.flex-start{
+  justify-content: flex-start;
+}
 .flex-space-between{
   justify-content: space-between;
 }
@@ -76,6 +102,9 @@ header {
 }
 .flex-grow{
   flex-grow: 1;
+}
+.flex-no-shrink{
+  flex-shrink: 0;
 }
 .center-hor {
   margin: 0 auto;
@@ -107,9 +136,10 @@ button {
 }
 .details {
   background-color: white;
-  width: 50rem;
   border-radius: 5px;
   z-index: 100;
+  padding: 10px;
+  position: relative;
 }
 .poster {
   width: 15rem;
@@ -120,6 +150,11 @@ button {
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0
+}
+
+.scroll-off{
+  position: fixed;
+  overflow-y: scroll;
 }
 
 .footer {
@@ -162,8 +197,16 @@ h1, h2, h3, h4, h5, h6 {
 .clickable{
   cursor: pointer;
 }
+.close-btn{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 .rounded{
   border-radius: 0 0 10px 10px;
+}
+.margin-right{
+  margin-right: var(--movie-margin);
 }
 .dropshadow:after{
 	content: '';
