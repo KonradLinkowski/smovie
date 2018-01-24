@@ -5,7 +5,7 @@
       <div style="flex-grow"></div>
       <span class="color-text clickable" @click="sortMovies">Sortuj: <span class="color-text bold">{{ sortedby.current.name }}</span> </span>
       <div style="flex-grow"></div>
-      <button v-bind:class="{invisible: !hasNextPage}" @click="nextPage"><i class="medium material-icons">navigate_next</i></button>
+      <button v-bind:class="{invisible: !hasNextPage()}" @click="nextPage"><i class="medium material-icons">navigate_next</i></button>
     </div>
     <div class="container flex-wrap blank-field site-width center-hor">
       <Movie v-for="item in list" :key="item.id" :movie="item" />
@@ -14,8 +14,9 @@
       <div slot="no-more" class="container flex-space-between flex-center-vert navigation site-width center-hor">
         <button v-bind:class="{invisible: page <= 1}" @click="prevPage"><i class="medium material-icons">navigate_before</i></button>
         <div style="flex-grow"></div>
-        <button v-bind:class="{invisible: !hasNextPage}" @click="nextPage"><i class="medium material-icons">navigate_next</i></button>
+        <button v-bind:class="{invisible: !hasNextPage()}" @click="nextPage"><i class="medium material-icons">navigate_next</i></button>
       </div>
+      <span slot="no-results">Brak filmów :(</span>
     </infinite-loading>
   </div>
 </template>
@@ -30,7 +31,7 @@ export default {
   data() {
     return {
       list: [],
-      moviePage: 1,
+      moviePage: 0,
       pagePerSite: 5,
       page: 1,
       infiniteState: null,
@@ -74,23 +75,27 @@ export default {
     }
   },
   created: function() {
-    this.moviePage = (this.$route.query.page - 1) * this.pagePerSite + 1 || 1
+    this.moviePage = (this.$route.query.page - 1) * this.pagePerSite || 0
     this.page = this.$route.query.page || 1
     this.sortedby.current = this.sortedby.states.popularity
   },
   methods: {
     infiniteHandler($state) {
+      if (this.totalPages && this.moviePage >= this.totalPages) {
+        $state.complete()
+        return
+      }
       this.infiniteState = $state
       getPopularMovies({
-        page: this.moviePage
+        page: this.moviePage + 1
       })
       .then(movies => {
         if (movies.results.length) {
-          this.totalPages = movies.total_results
+          this.totalPages = movies.total_pages
           this.list = this.list.concat(movies.results)
           $state.loaded();
           this.moviePage++;
-          if ((this.moviePage - 1) % this.pagePerSite === 0) {
+          if (this.moviePage % this.pagePerSite === 0) {
             $state.complete();
           }
         } else {
@@ -99,26 +104,27 @@ export default {
       })
     },
     hasNextPage() {
-      if(totalPages == null) {
+      if(this.totalPages == null) {
         return true
       }
-      if(this.moviePage % this.pagePerSite < this.totalPages % this.pagePerSite) {
+      if(Math.floor(this.moviePage / this.pagePerSite) + 1 < Math.floor(this.totalPages / this.pagePerSite) + 1) {
         return true
       }
       return false
     },
     sortMovies() {
       this.sortedby.next()
-      console.log(this.sortedby)
       this.list.sort(this.sortedby.current.fun)
     },
     nextPage() {
-      this.page++
-      this.moviePage = this.page * this.pagePerSite + 1
-      this.list = []
-      router.push({ query: { page: this.page } })
-      this.infiniteState.reset()
-      this.sortedby.current = this.sortedby.states.popularity
+      if (this.hasNextPage) {
+        this.page++
+        this.moviePage = (this.page - 1) * this.pagePerSite
+        this.list = []
+        router.push({ query: { page: this.page } })
+        this.infiniteState.reset()
+        this.sortedby.current = this.sortedby.states.popularity
+      }
     },
     prevPage() {
       if (this.page > 1) {
