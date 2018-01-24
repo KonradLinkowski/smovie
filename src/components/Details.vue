@@ -2,7 +2,7 @@
   <div class="lightbox" v-show="isOpen">
     <div class="position-fixed max-width max-height top-0 clickable" @click="close"></div>
     <div class="details container">
-      <button class="close-btn" @click="close"><i class="material-icons">close</i></button>
+      <div class="close-btn" @click="close"><i class="material-icons">close</i></div>
       <div class="poster flex-no-shrink margin-right">
         <img class="border" v-if="movie.poster_path" :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="Movie">
         <img class="border" v-else src="https://placehold.it/500x750" alt="Movie">

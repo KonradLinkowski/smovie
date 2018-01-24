@@ -4,7 +4,7 @@
 *::after {
   box-sizing: border-box;
   font-family: 'Lato', sans-serif, Arial, Helvetica, sans-serif;
-  color: #29241E
+  color: #29241E;
 }
 body {
   margin: 0;
@@ -169,6 +169,12 @@ button {
 h1, h2, h3, h4, h5, h6 {
   margin: 0
 }
+h1{
+  font-size: 1.4rem;
+}
+h2{
+  font-size: 1.2rem;
+}
 
 .scroll-off{
   position: fixed;
@@ -219,6 +225,7 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   top: 0;
   right: 0;
+  cursor: pointer;
 }
 .rounded{
   border-radius: 0 0 10px 10px;
