@@ -11,12 +11,12 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'MovieList',
+      name: 'Home',
       component: MovieList,
     },
     {
       path: '/search',
-      name: 'SearchList',
+      name: 'Search',
       component: SearchList 
     }
   ],

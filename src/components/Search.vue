@@ -21,17 +21,17 @@ export default {
   },
   created: function() {
     if(!this.$route.query.movie) {
-      router.push('/')
+      router.push({ name: 'Home' })
       return
     }
     this.message = this.$route.query.movie
   },
   methods: {
     search: function() {
-      router.push({ name: 'SearchList', query: { movie: this.message }})
+      router.push({ name: 'Search', query: { movie: this.message }})
     },
     goHome() {
-      router.push({ path: '/' })
+      router.push({ name: 'Home' })
       this.message = ''
     }
   }
