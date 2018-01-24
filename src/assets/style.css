@@ -24,6 +24,9 @@ body {
     flex-direction: column;
     align-items: center;
   }
+  header{
+    font-size: 1.8rem;
+  }
 }
 @media (min-width: 480px) {
 }
@@ -34,6 +37,9 @@ body {
     overflow: scroll;
     flex-direction: row;
     align-items: initial;
+  }
+  header{
+    font-size: 3rem;
   }
 }
 @media (min-width: 992px) {
@@ -49,8 +55,6 @@ body {
 }
 header {
   background-color: var(--main-color);
-  height: 4rem;
-  padding-left: 30px;
 }
 .search-bar{
   position: sticky;
@@ -115,12 +119,25 @@ header {
 img {
   width: 100%;
 }
+button{
+  height: 3rem;
+  width: 3rem;
+}
 input.search {
   height: 3rem;
   padding: 10px;
 }
 button {
   width: 3rem;
+}
+.color-text {
+  color: var(--main-color);
+}
+.bold {
+  font-weight: bold;
+}
+.invisible {
+  visibility: hidden;
 }
 .lightbox {
   position: fixed;

@@ -1,20 +1,20 @@
 <template>
   <div class="max-width">
     <div class="container flex-space-between flex-center-vert navigation site-width center-hor">
-      <button v-show="page > 1" @click="prevPage"><i class="medium material-icons">navigate_before</i></button>
+      <button v-bind:class="{invisible: page <= 1}" @click="prevPage"><i class="medium material-icons">navigate_before</i></button>
       <div style="flex-grow"></div>
-      <button @click="sortMoviesPop">Sort</button>
+      <span class="color-text clickable" @click="sortMovies">Sortuj: <span class="color-text bold">{{ sortedby.current.name }}</span> </span>
       <div style="flex-grow"></div>
-      <button v-show="hasNextPage" @click="nextPage"><i class="medium material-icons">navigate_next</i></button>
+      <button v-bind:class="{invisible: !hasNextPage}" @click="nextPage"><i class="medium material-icons">navigate_next</i></button>
     </div>
     <div class="container flex-wrap blank-field site-width center-hor">
       <Movie v-for="item in list" :key="item.id" :movie="item" />
     </div>
     <infinite-loading @infinite="infiniteHandler">
       <div slot="no-more" class="container flex-space-between flex-center-vert navigation site-width center-hor">
-        <button v-show="page > 1" @click="prevPage"><i class="medium material-icons">navigate_before</i></button>
+        <button v-bind:class="{invisible: page <= 1}" @click="prevPage"><i class="medium material-icons">navigate_before</i></button>
         <div style="flex-grow"></div>
-        <button v-show="hasNextPage" @click="nextPage"><i class="medium material-icons">navigate_next</i></button>
+        <button v-bind:class="{invisible: !hasNextPage}" @click="nextPage"><i class="medium material-icons">navigate_next</i></button>
       </div>
     </infinite-loading>
   </div>
@@ -35,12 +35,48 @@ export default {
       page: 1,
       infiniteState: null,
       totalPages: null,
-      sorted: false,
+      sortedby: {
+        states: {
+          popularity: {
+            fun: (a, b) => {
+              return a.popularity < b.popularity ? 1 : a.popularity > b.popularity ? -1 : 0
+            },
+            name: 'popularność'
+          },
+          atoz: {
+            fun: (a, b) => {
+              a.title = a.title.toLowerCase()
+              b.title = b.title.toLowerCase()
+              return a.title > b.title ? 1 : a.title < b.title ? -1 : 0;
+            },
+            name: 'a do z'
+          },
+          ztoa: {
+            fun: (a, b) => {
+              a.title = a.title.toLowerCase()
+              b.title = b.title.toLowerCase()
+              return a.title < b.title ? 1 : a.title > b.title ? -1 : 0;
+            },
+            name: 'z do a'
+          }
+        },
+        current: null,
+        next: () => {
+          if (this.sortedby.current == this.sortedby.states.popularity) {
+            this.sortedby.current = this.sortedby.states.atoz
+          } else if (this.sortedby.current == this.sortedby.states.atoz) {
+            this.sortedby.current = this.sortedby.states.ztoa
+          } else {
+            this.sortedby.current = this.sortedby.states.popularity
+          }
+        }
+      },
     }
   },
   created: function() {
     this.moviePage = (this.$route.query.page - 1) * this.pagePerSite + 1 || 1
     this.page = this.$route.query.page || 1
+    this.sortedby.current = this.sortedby.states.popularity
   },
   methods: {
     infiniteHandler($state) {
@@ -71,41 +107,10 @@ export default {
       }
       return false
     },
-    sortMoviesPop() {
-      this.list.sort((a, b) => {
-        a = a.popularity, b = b.popularity;
-        if (this.sorted) {
-          if (a > b)
-            return -1;
-          if (a < b)
-            return 1;
-        } else {
-          if (a < b)
-            return -1;
-          if (a > b)
-            return 1;
-        }
-        return 0;
-      });
-      this.sorted = !this.sorted
-    },
-    sortMoviesAlpha() {
-      this.list.sort((a, b) => {
-        a = a.title.toLowerCase(), b = b.title.toLowerCase();
-        if (this.sorted) {
-          if (a > b)
-            return -1;
-          if (a < b)
-            return 1;
-        } else {
-          if (a < b)
-            return -1;
-          if (a > b)
-            return 1;
-        }
-        return 0;
-      });
-      this.sorted = !this.sorted
+    sortMovies() {
+      this.sortedby.next()
+      console.log(this.sortedby)
+      this.list.sort(this.sortedby.current.fun)
     },
     nextPage() {
       this.page++
@@ -113,6 +118,7 @@ export default {
       this.list = []
       router.push({ query: { page: this.page } })
       this.infiniteState.reset()
+      this.sortedby.current = this.sortedby.states.popularity
     },
     prevPage() {
       if (this.page > 1) {
@@ -121,6 +127,7 @@ export default {
         this.list = []
         router.push({ query: { page: this.page } })
         this.infiniteState.reset()
+        this.sortedby.current = this.sortedby.states.popularity
       }
     }
   },
