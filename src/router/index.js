@@ -6,7 +6,7 @@ import SearchList from '../components/SearchList'
 Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
+  mode: 'hash',
   base: window.location.pathName,
   routes: [
     {
