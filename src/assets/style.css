@@ -47,11 +47,13 @@ header {
   display: flex;
   flex-direction: column;
 }
+/*
 .blank-field::after {
   content: "";
   flex: auto;
-  /*margin: var(--movie-margin);*/
+  margin: var(--movie-margin);
 }
+*/
 .movie-footer {
   border-top: solid 1px lightgray;
   height: 2rem;
