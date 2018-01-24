@@ -54,7 +54,7 @@ export default {
           this.list = this.list.concat(movies.results)
           $state.loaded();
           this.moviePage++;
-          if (this.moviePage % (this.pagePerSite + 1) === 0) {
+          if ((this.moviePage - 1) % this.pagePerSite === 0) {
             $state.complete();
           }
         } else {
