@@ -47,17 +47,17 @@ export default {
           },
           atoz: {
             fun: (a, b) => {
-              a.title = a.title.toLowerCase()
-              b.title = b.title.toLowerCase()
-              return a.title > b.title ? 1 : a.title < b.title ? -1 : 0;
+              let f = a.title.toLowerCase()
+              let s = b.title.toLowerCase()
+              return f > s ? 1 : f < s ? -1 : 0;
             },
             name: 'a do z'
           },
           ztoa: {
             fun: (a, b) => {
-              a.title = a.title.toLowerCase()
-              b.title = b.title.toLowerCase()
-              return a.title < b.title ? 1 : a.title > b.title ? -1 : 0;
+              let f = a.title.toLowerCase()
+              let s = b.title.toLowerCase()
+              return f < s ? 1 : f > s? -1 : 0;
             },
             name: 'z do a'
           }
