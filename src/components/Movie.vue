@@ -5,7 +5,7 @@
       <img v-else src="https://placehold.it/500x750" alt="Movie">
     </div>
     <div class="flex-grow movie-details">
-      <h1 class="">{{ movie.title }}</h1>
+      <h2 class="">{{ movie.title }}</h2>
       <p class="">Popularność: {{ movie.popularity }}</p>
       <p class="">Liczba głosów: {{ movie.vote_count }}</p>
     </div>
