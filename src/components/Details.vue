@@ -10,7 +10,7 @@
       <div class="container-vert flex-wrap flex-start">
         <div class="flex-strech-self">
           <h2>{{ movie.title }}</h2>
-          <h3>{{ movie.original_title }}</h3>
+          <h3 class="italic">{{ movie.original_title }}</h3>
           <a :href="'https://www.themoviedb.org/movie/' + movie.id">https://www.themoviedb.org/movie/{{ movie.id }}</a>
           <p class="flex-strech-self margin-5">
             {{ movie.overview }}

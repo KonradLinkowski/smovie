@@ -182,6 +182,9 @@ h3{
 .scroll-on {
   overflow-y: scroll;
 }
+.italic {
+  font-style: italic;
+}
 .footer {
   right: 0;
   bottom: 0;
