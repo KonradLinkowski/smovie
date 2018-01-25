@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import _ from 'lodash'
 import { findMovies } from '../utils/api'
 import eventHub from '../utils/eventhub'
 import router from '../router'
