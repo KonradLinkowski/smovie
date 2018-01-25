@@ -16,19 +16,19 @@
             {{ movie.overview }}
           </p>
           <div class="container flex-wrap flex-start">
-            <p class="margin-5" v-if="movie.genres.length">
+            <p class="margin-5" v-if="movie.genres && movie.genres.length">
               Gatunki
               <ul>
                 <li v-for="(item, index) in movie.genres" :key="item.id">{{ movie.genres[index].name }}</li>
               </ul>
             </p>
-            <p class="margin-5" v-if="movie.production_countries.length">
+            <p class="margin-5" v-if="movie.production_countries && movie.production_countries.length">
               Kraje produkcji
               <ul>
                 <li v-for="(item, index) in movie.production_countries" :key="item.id">{{ movie.production_countries[index].name }}</li>
               </ul>
             </p>
-            <p class="margin-5" v-if="movie.production_companies.length">
+            <p class="margin-5" v-if="movie.production_companies && movie.production_companies.length">
               Firmy produkcyjne
               <ul>
                 <li v-for="(item, index) in movie.production_companies" :key="item.id">{{ movie.production_companies[index].name }}</li>
@@ -75,10 +75,11 @@ export default {
       this.isOpen = false;
     },
     switchScrolling() {
+      let app = document.querySelector('body')
       if (this.isOpen) {
-        document.querySelector('#app').classList.add('scroll-off')
+        app.classList.add('scroll-off')
       } else {
-        document.querySelector('#app').classList.remove('scroll-off')
+        app.classList.remove('scroll-off')
       }
     }
   }

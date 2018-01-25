@@ -177,10 +177,11 @@ h3{
 }
 
 .scroll-off{
-  position: fixed;
+  overflow-y: hidden;
+}
+.scroll-on {
   overflow-y: scroll;
 }
-
 .footer {
   right: 0;
   bottom: 0;
