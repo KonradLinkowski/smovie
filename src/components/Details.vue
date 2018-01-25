@@ -7,28 +7,28 @@
         <img class="border" v-if="movie.poster_path" :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="Movie">
         <img class="border" v-else src="https://placehold.it/500x750" alt="Movie">
       </div>
-      <div class="container flex-wrap flex-start">
+      <div class="container flex-wrap  flex-start">
         <div class="flex-strech-self">
           <h2>{{ movie.title }}</h2>
           <h3>{{ movie.original_title }}</h3>
           <a :href="'https://www.themoviedb.org/movie/' + movie.id">https://www.themoviedb.org/movie/{{ movie.id }}</a>
         </div>
-        <p class="flex-strech-self no-margin">
+        <p class="flex-strech-self margin-5">
           {{ movie.overview }}
         </p>
-        <p class="no-margin">
+        <p class="margin-5">
           Gatunki
           <ul>
             <li v-for="(item, index) in movie.genres" :key="item.id">{{ movie.genres[index].name }}</li>
           </ul>
         </p>
-        <p class="no-margin">
+        <p class="margin-5">
           Kraje produkcji
           <ul>
             <li v-for="(item, index) in movie.production_countries" :key="item.id">{{ movie.production_countries[index].name }}</li>
           </ul>
         </p>
-        <p class="no-margin">
+        <p class="margin-5">
           Firmy produkcyjne
           <ul>
             <li v-for="(item, index) in movie.production_companies" :key="item.id">{{ movie.production_companies[index].name }}</li>

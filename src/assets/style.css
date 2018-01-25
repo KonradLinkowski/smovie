@@ -274,3 +274,10 @@ h3{
 .shadow-bot.hvr-float:active {
   box-shadow: 0 8px 6px -6px black;
 }
+ul{
+  margin: 5px;
+  padding-left: 20px;
+}
+.margin-5{
+  margin: 5px;
+}
