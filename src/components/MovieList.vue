@@ -75,9 +75,7 @@ export default {
     }
   },
   created: function() {
-    this.moviePage = (this.$route.query.page - 1) * this.pagePerSite || 0
-    this.page = this.$route.query.page || 1
-    this.sortedby.current = this.sortedby.states.popularity
+    this.loadPage();
   },
   methods: {
     infiniteHandler($state) {
@@ -118,23 +116,24 @@ export default {
     },
     nextPage() {
       if (this.hasNextPage) {
-        this.page++
-        this.moviePage = (this.page - 1) * this.pagePerSite
-        this.list = []
-        router.push({ query: { page: this.page } })
-        this.infiniteState.reset()
-        this.sortedby.current = this.sortedby.states.popularity
+        router.push({ query: { page: this.page + 1} })
+        this.loadPage()
       }
     },
     prevPage() {
       if (this.page > 1) {
-        this.page--
-        this.moviePage = (this.page - 1) * this.pagePerSite + 1
-        this.list = []
-        router.push({ query: { page: this.page } })
-        this.infiniteState.reset()
-        this.sortedby.current = this.sortedby.states.popularity
+        router.push({ query: { page: this.page - 1 } })
+        this.loadPage()
       }
+    },
+    loadPage() {
+      this.list = []
+      if (this.infiniteState) {
+        this.infiniteState.reset()
+      }
+      this.moviePage = (this.$route.query.page - 1) * this.pagePerSite || 0
+      this.page = this.$route.query.page || 1
+      this.sortedby.current = this.sortedby.states.popularity
     }
   },
   components: {

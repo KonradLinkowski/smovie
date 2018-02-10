@@ -82,10 +82,7 @@ export default {
   },
   watch: {
     '$route.query.movie' (to, from) {
-      this.page = 1
-      this.moviePage = 0
-      this.list = []
-      this.infiniteState.reset()
+      this.loadPage()
     },
     totalPages: function() {
       this.hasNextPage()
@@ -136,26 +133,27 @@ export default {
     },
     nextPage() {
       if (this.hasNextPage) {
-        this.page++
-        this.moviePage = (this.page - 1) * this.pagePerSite
-        this.list = []
-        let query = { movie: this.$route.query.movie, page: this.page }
+        let query = { movie: this.$route.query.movie, page: parseInt(this.page) + 1 }
         router.push({ query: query })
-        this.infiniteState.reset()
-        this.sortedby.current = this.sortedby.states.popularity
+        this.loadPage()
       }
     },
     prevPage() {
       if (this.page > 1) {
-        this.page--
-        this.moviePage = (this.page - 1) * this.pagePerSite + 1
-        this.list = []
-        let query = { movie: this.$route.query.movie, page: this.page }
+        let query = { movie: this.$route.query.movie, page: parseInt(this.page) - 1 }
         router.push({ query: query })
-        this.infiniteState.reset()
-        this.sortedby.current = this.sortedby.states.popularity
+        this.loadPage()
       }
     },
+    loadPage() {
+      this.list = []
+      if (this.infiniteState) {
+        this.infiniteState.reset()
+      }
+      this.moviePage = (this.$route.query.page - 1) * this.pagePerSite || 0
+      this.page = this.$route.query.page || 1
+      this.sortedby.current = this.sortedby.states.popularity
+    }
   },
   components: {
       Movie,
