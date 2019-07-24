@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+var { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   entry: './src/main.js',
@@ -53,7 +54,10 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  plugins: [
+    new VueLoaderPlugin()
+  ]
 }
 
 if (process.env.NODE_ENV === 'production') {
@@ -65,14 +69,12 @@ if (process.env.NODE_ENV === 'production') {
         NODE_ENV: '"production"'
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false
-      }
-    }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
     })
   ])
+  module.exports.optimization = {
+    minimize: true
+  }
+  module.exports.mode = 'production'
 }
