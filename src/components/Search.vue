@@ -17,7 +17,7 @@ export default {
     };
   },
   created() {
-    if(!this.$route.query.movie) {
+    if (!this.$route.query.movie) {
       this.goHome();
       return;
     }
