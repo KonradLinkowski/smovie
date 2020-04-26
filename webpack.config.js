@@ -1,6 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
 var { VueLoaderPlugin } = require('vue-loader')
+var CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry: './src/main.js',
@@ -71,8 +72,11 @@ if (process.env.NODE_ENV === 'production') {
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
-    })
-  ])
+    }),
+    new CopyPlugin([
+      { from: 'static', to: 'static' }
+    ])
+  ]),
   module.exports.optimization = {
     minimize: true
   }
