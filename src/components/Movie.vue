@@ -17,21 +17,21 @@
 </template>
 
 <script>
-import eventHub from '../utils/eventhub'
+import eventHub from '../utils/eventhub';
 export default {
   data() {
     return {
-    }
+    };
   },
   props: [
     'movie'
   ],
   methods: {
     openDetails() {
-      eventHub.$emit('show-details', this.movie)
+      eventHub.$emit('show-details', this.movie);
     }
   }
-}
+};
 </script>
 
 <style>

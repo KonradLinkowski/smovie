@@ -10,9 +10,9 @@
 </template>
 
 <script>
-import Details from './components/Details'
-import Search from './components/Search'
-import MovieList from './components/MovieList'
+import Details from './components/Details';
+import Search from './components/Search';
+import MovieList from './components/MovieList';
 export default {
   name: 'app',
   components: {
@@ -20,7 +20,7 @@ export default {
     MovieList,
     Details
   }
-}
+};
 </script>
 <style>
 @import './assets/style.css';

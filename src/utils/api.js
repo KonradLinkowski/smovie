@@ -1,7 +1,7 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const key = '0e16ef3395ba49327a6a6d3e9b4861e1'
-const serverURL = 'https://api.themoviedb.org/3/'
+const key = '0e16ef3395ba49327a6a6d3e9b4861e1';
+const serverURL = 'https://api.themoviedb.org/3/';
 
 export function getPopularMovies(params) {
   return new Promise((resolve, reject) => {
@@ -15,12 +15,12 @@ export function getPopularMovies(params) {
       }
     })
     .then(({data}) => {
-      resolve(data)
+      resolve(data);
     })
     .catch(error => {
-      reject(error)
+      reject(error);
     });
-  })
+  });
 }
 
 export function getMovie(id) {
@@ -34,12 +34,12 @@ export function getMovie(id) {
       }
     })
     .then(({data}) => {
-      resolve(data)
+      resolve(data);
     })
     .catch(err => {
-      reject(err)
-    })
-  })
+      reject(err);
+    });
+  });
 }
 
 export function findMovies(params) {
@@ -55,12 +55,12 @@ export function findMovies(params) {
       }
     })
     .then(({data}) => {
-      resolve(data)
+      resolve(data);
     })
     .catch(err => {
-      reject(err)
-    })
-  })
+      reject(err);
+    });
+  });
 }
 
 export function getGenres() {
@@ -74,10 +74,10 @@ export function getGenres() {
       }
     })
     .then(({data}) => {
-      resolve(data.genres)
+      resolve(data.genres);
     })
     .catch(err => {
-      reject(err)
-    })
-  })
+      reject(err);
+    });
+  });
 }

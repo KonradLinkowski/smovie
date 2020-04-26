@@ -42,21 +42,21 @@
 </template>
 
 <script>
-import eventHub from '../utils/eventhub'
-import { getMovie } from '../utils/api'
+import eventHub from '../utils/eventhub';
+import { getMovie } from '../utils/api';
 export default {
   data() {
     return {
       isOpen: false,
       movie: {},
       genres: [],
-    }
+    };
   },
-  created: function() {
-    eventHub.$on('show-details', this.open)
+  created() {
+    eventHub.$on('show-details', this.open);
   },
   watch: {
-    isOpen: function() {
+    isOpen() {
       this.switchScrolling();
     }
   },
@@ -64,26 +64,26 @@ export default {
     open(movie) {
       getMovie(movie.id)
       .then(details => {
-        this.movie = Object.assign(movie, details)
+        this.movie = Object.assign(movie, details);
         this.isOpen = true;
       })
       .catch(err => {
-        console.error(err)
-      })
+        console.error(err);
+      });
     },
     close() {
       this.isOpen = false;
     },
     switchScrolling() {
-      let app = document.querySelector('body')
+      let app = document.querySelector('body');
       if (this.isOpen) {
-        app.classList.add('scroll-off')
+        app.classList.add('scroll-off');
       } else {
-        app.classList.remove('scroll-off')
+        app.classList.remove('scroll-off');
       }
     }
   }
-}
+};
 </script>
 
 <style>

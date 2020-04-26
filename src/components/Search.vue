@@ -9,34 +9,32 @@
 </template>
 
 <script>
-import { findMovies } from '../utils/api'
-import eventHub from '../utils/eventhub'
-import router from '../router'
+import router from '../router';
 export default {
   data() {
     return {
       message: ''
-    }
+    };
   },
-  created: function() {
+  created() {
     if(!this.$route.query.movie) {
       this.goHome();
-      return
+      return;
     }
-    this.message = this.$route.query.movie
+    this.message = this.$route.query.movie;
   },
   methods: {
-    search: function() {
-      router.push({ query: { movie: this.message }})
+    search() {
+      router.push({ query: { movie: this.message }});
     },
     goHome() {
       if (router.currentRoute.fullPath !== '/') {
-        router.push('/')
+        router.push('/');
       }
-      this.message = ''
+      this.message = '';
     }
   }
-}
+};
 </script>
 
 <style>
