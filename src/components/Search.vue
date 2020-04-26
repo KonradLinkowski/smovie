@@ -20,17 +20,19 @@ export default {
   },
   created: function() {
     if(!this.$route.query.movie) {
-      router.push({ name: 'Home' })
+      this.goHome();
       return
     }
     this.message = this.$route.query.movie
   },
   methods: {
     search: function() {
-      router.push({ name: 'Search', query: { movie: this.message }})
+      router.push({ query: { movie: this.message }})
     },
     goHome() {
-      router.push({ name: 'Home' })
+      if (router.currentRoute.fullPath !== '/') {
+        router.push('/')
+      }
       this.message = ''
     }
   }

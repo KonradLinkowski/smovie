@@ -5,7 +5,7 @@
     </header>
     <Details />
     <Search />
-    <router-view></router-view>
+    <MovieList />
   </div>
 </template>
 

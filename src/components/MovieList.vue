@@ -25,7 +25,7 @@
 import Movie from './Movie'
 import InfiniteLoading from 'vue-infinite-loading';
 import { getPopularMovies, findMovies } from '../utils/api'
-import eventHub from '../utils/eventhub';
+import eventHub from '../utils/eventhub'
 import router from '../router'
 export default {
   data() {
@@ -34,6 +34,7 @@ export default {
       moviePage: 0,
       pagePerSite: 5,
       page: 1,
+      searchedMovie: '',
       infiniteState: null,
       totalPages: null,
       sortedby: {
@@ -75,18 +76,26 @@ export default {
     }
   },
   created: function() {
-    this.loadPage();
+    this.moviePage = (this.$route.query.page - 1) * this.pagePerSite || 0
+    this.page = this.$route.query.page || 1
+    this.sortedby.current = this.sortedby.states.popularity
+  },
+  watch: {
+    '$route.query.movie' (to, from) {
+      this.loadPage()
+    },
+    totalPages: function() {
+      this.hasNextPage()
+    }
   },
   methods: {
     infiniteHandler($state) {
-      if (this.totalPages && this.moviePage >= this.totalPages) {
+      if(this.totalPages && this.moviePage >= this.totalPages) {
         $state.complete()
         return
       }
       this.infiniteState = $state
-      getPopularMovies({
-        page: this.moviePage + 1
-      })
+      this.loadMovies(this.$route.query.movie, this.moviePage + 1)
       .then(movies => {
         if (movies.results.length) {
           this.totalPages = movies.total_pages
@@ -101,9 +110,26 @@ export default {
         }
       })
     },
+    loadMovies(movie, page) {
+      if (movie) {
+        return findMovies({
+          query: movie,
+          page
+        })
+      } else {
+        return getPopularMovies({
+          page
+        })
+      }
+    },
+    changeMovie(movie) {
+      this.searchedMovie = movie
+      this.list = []
+      this.infiniteState.reset()
+    },
     hasNextPage() {
       if(this.totalPages == null) {
-        return true
+        return false
       }
       if(Math.floor(this.moviePage / this.pagePerSite) + 1 < Math.floor(this.totalPages / this.pagePerSite) + 1) {
         return true
@@ -116,13 +142,15 @@ export default {
     },
     nextPage() {
       if (this.hasNextPage) {
-        router.push({ query: { page: this.page + 1} })
+        let query = { movie: this.$route.query.movie, page: parseInt(this.page) + 1 }
+        router.push({ query })
         this.loadPage()
       }
     },
     prevPage() {
       if (this.page > 1) {
-        router.push({ query: { page: this.page - 1 } })
+        let query = { movie: this.$route.query.movie, page: parseInt(this.page) - 1 }
+        router.push({ query })
         this.loadPage()
       }
     },
@@ -137,8 +165,8 @@ export default {
     }
   },
   components: {
-    Movie,
-    InfiniteLoading
+      Movie,
+      InfiniteLoading
   }
 }
 </script>
