@@ -1,7 +1,10 @@
+/* eslint-disable */
 var path = require('path')
 var webpack = require('webpack')
 var { VueLoaderPlugin } = require('vue-loader')
 var CopyPlugin = require('copy-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   entry: './src/main.js',
@@ -65,13 +68,17 @@ if (process.env.NODE_ENV === 'production') {
   module.exports.devtool = '#source-map'
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
+    new CleanWebpackPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
       }
     }),
     new webpack.LoaderOptionsPlugin({
-      minimize: true
+      minimize: true,
+    }),
+    new HtmlWebpackPlugin({
+      template: './index.html'
     }),
     new CopyPlugin([
       { from: 'static', to: 'static' }
