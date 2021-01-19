@@ -1,6 +1,6 @@
 {
-  "name": "fiswietlacz",
-  "description": "Movie searcher.",
+  "name": "smovie",
+  "description": "Small Vue application consuming TMDB API",
   "version": "1.0.0",
   "author": "Konrad Linkowski <linkowski.konrad97@gmail.com>",
   "license": "MIT",

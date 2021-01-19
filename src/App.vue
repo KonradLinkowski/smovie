@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header class="container flex-center-vert">
-      <h1 class="bright-color">Fiswietlacz</h1>
+      <h1 class="bright-color">smovie</h1>
     </header>
     <Details />
     <Search />

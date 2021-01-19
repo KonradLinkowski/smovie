@@ -1,6 +1,5 @@
-# fiswietlacz
-
-> Movie searcher.
+# smovie
+Small Vue application consuming [TMDB API](https://developers.themoviedb.org/)
 
 ## Build Setup
 
