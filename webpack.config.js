@@ -4,11 +4,13 @@ var webpack = require('webpack')
 var { VueLoaderPlugin } = require('vue-loader')
 var CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   entry: './src/main.js',
   output: {
-    clean: true,
+    path: path.resolve(__dirname, './dist'),
+    publicPath: 'dist/',
     filename: 'build.js'
   },
   module: {
@@ -50,27 +52,22 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    client: {
-      overlay: true,
-      logging: 'warn' 
-    }
+    noInfo: true,
+    overlay: true
   },
   performance: {
     hints: false
   },
-  devtool: 'eval-source-map',
+  devtool: '#eval-source-map',
   plugins: [
     new VueLoaderPlugin(),
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-      inject: false
-    }),
+    new CleanWebpackPlugin()
   ]
 }
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = 'source-map'
-  module.exports.output.filename = 'build.js'
+  module.exports.devtool = '#source-map'
+  module.exports.output.filename = 'dist/build.js'
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
@@ -82,14 +79,12 @@ if (process.env.NODE_ENV === 'production') {
       minimize: true,
     }),
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './index.html',
       inject: false
     }),
-    new CopyPlugin({
-      patterns: [
-        { from: 'static', to: 'static' }
-      ]
-    })
+    new CopyPlugin([
+      { from: 'static', to: 'static' }
+    ])
   ]),
   module.exports.optimization = {
     minimize: true
