@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Lato');
-*,
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,300&display=swap');*,
 *::before,
 *::after {
   box-sizing: border-box;
@@ -154,14 +153,19 @@ button {
 }
 .details {
   background-color: white;
+  justify-content: space-between;
   border-radius: 5px;
   z-index: 100;
-  padding: 10px;
+  padding: 40px;
   position: relative;
 }
 .poster {
   width: 15rem;
 }
+.poster-info {
+  margin: 20px;
+}
+
 .navigation {
   height: 5rem;
 }
@@ -174,6 +178,10 @@ h2{
 }
 h3{
   font-size: 1.1rem;
+}
+
+.small-bold {
+  font-weight: 700;
 }
 
 .scroll-off{
@@ -207,6 +215,9 @@ h3{
   border-width: 2px;
   border-style: solid;
 }
+.bullet-pts {
+  justify-content: space-between;
+}
 .bright-color{
   color: var(--bright-color);
 }
@@ -227,6 +238,8 @@ h3{
 }
 .close-btn{
   position: absolute;
+  padding: 10px;
+  font-weight: 700;
   top: 0;
   right: 0;
   cursor: pointer;
