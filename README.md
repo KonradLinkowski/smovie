@@ -1,6 +1,8 @@
 # smovie
 Small Vue application consuming [TMDB API](https://developers.themoviedb.org/)
 
+[![Build and Deploy](https://github.com/KonradLinkowski/smovie/actions/workflows/deploy.yml/badge.svg)](https://github.com/KonradLinkowski/smovie/actions/workflows/deploy.yml)
+
 ## Build Setup
 
 ``` bash
