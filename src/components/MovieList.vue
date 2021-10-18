@@ -39,13 +39,13 @@ export default {
       sortedby: {
         states: [{
             fun: (a, b) => a.popularity - b.popularity,
-            name: 'popularność'
+            name: 'popularity'
           }, {
             fun: (a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()),
-            name: 'a do z'
+            name: 'a - z'
           }, {
             fun: (a, b) => b.title.toLowerCase().localeCompare(a.title.toLowerCase()),
-            name: 'z do a'
+            name: 'z - a'
           }
         ],
         current: 0,
