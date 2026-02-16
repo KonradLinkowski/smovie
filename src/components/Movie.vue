@@ -6,8 +6,8 @@
     </div>
     <div class="flex-grow movie-details">
       <h2 class="">{{ movie.title }}</h2>
-      <p class="">Popularność: {{ movie.popularity }}</p>
-      <p class="">Liczba głosów: {{ movie.vote_count }}</p>
+      <p class="">Popularity: {{ movie.popularity }}</p>
+      <p class="">Vote count: {{ movie.vote_count }}</p>
     </div>
     <div class="container flex-space-between movie-footer">
       <span>{{ movie.release_date }}</span>
