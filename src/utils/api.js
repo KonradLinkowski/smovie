@@ -3,6 +3,8 @@ import axios from 'axios';
 const key = '0e16ef3395ba49327a6a6d3e9b4861e1';
 const serverURL = 'https://api.themoviedb.org/3/';
 
+const lang = 'en';
+
 export function getPopularMovies(params) {
   return new Promise((resolve, reject) => {
     axios({
@@ -10,7 +12,7 @@ export function getPopularMovies(params) {
       url: serverURL + 'movie/popular',
       params: {
         api_key: key,
-        language: 'pl',
+        language: lang,
         page: params.page
       }
     })
@@ -30,7 +32,7 @@ export function getMovie(id) {
       url: serverURL + 'movie/' + id,
       params: {
         api_key: key,
-        language: 'pl',
+        language: lang,
       }
     })
     .then(({data}) => {
@@ -49,7 +51,7 @@ export function findMovies(params) {
       url: serverURL + 'search/movie',
       params: {
         api_key: key,
-        language: 'pl',
+        language: lang,
         page: params.page,
         query: params.query
       }
@@ -70,7 +72,7 @@ export function getGenres() {
       url: serverURL + 'genre/movie/list',
       params: {
         api_key: key,
-        language: 'pl',
+        language: lang,
       }
     })
     .then(({data}) => {
